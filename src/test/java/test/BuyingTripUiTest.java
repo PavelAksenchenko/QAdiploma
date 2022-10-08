@@ -3,7 +3,6 @@ package test;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import data.Card;
 import data.DataGenerator;
-
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,7 +12,7 @@ import page.PaymentPage;
 import page.StartPage;
 
 import static com.codeborne.selenide.Selenide.open;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class BuyingTripUiTest {
@@ -42,7 +41,7 @@ public class BuyingTripUiTest {
         StartPage startPage = new StartPage();
         PaymentPage paymentPage = startPage.goToPaymentPage();
         paymentPage.fillData(incorrectValuesCard);
-        assertTrue(paymentPage.inputInvalidIsVisible(), message);
+        assertTrue(paymentPage.checkInvalidInputError(), message);
     }
 
     @ParameterizedTest
@@ -53,7 +52,7 @@ public class BuyingTripUiTest {
         StartPage startPage = new StartPage();
         CreditPage creditPage = startPage.goToCreditPage();
         creditPage.fillData(incorrectValues);
-        assertTrue(creditPage.inputInvalidIsVisible(), message);
+        assertTrue(creditPage.checkInvalidInputMessage(), message);
     }
 
     @Test
@@ -63,7 +62,7 @@ public class BuyingTripUiTest {
         StartPage startPage = new StartPage();
         PaymentPage paymentPage = startPage.goToPaymentPage();
         paymentPage.fillData(expiredCard);
-        assertTrue(paymentPage.inputInvalidIsVisible(),"Должен показывать сообщение об ошибке, если срок карты истек, страница оплаты");
+        assertTrue(paymentPage.checkInvalidInputError(), "Должен показывать сообщение об ошибке, если срок карты истек, страница оплаты");
     }
 
     @Test
@@ -73,7 +72,7 @@ public class BuyingTripUiTest {
         StartPage startPage = new StartPage();
         CreditPage creditPage = startPage.goToCreditPage();
         creditPage.fillData(expiredCard);
-        assertTrue(creditPage.inputInvalidIsVisible(),"Должен показывать сообщение об ошибке, если срок карты истек, страница кредита");
+        assertTrue(creditPage.checkInvalidInputMessage(), "Должен показывать сообщение об ошибке, если срок карты истек, страница кредита");
     }
 
     @Test
@@ -83,7 +82,7 @@ public class BuyingTripUiTest {
         StartPage startPage = new StartPage();
         PaymentPage paymentPage = startPage.goToPaymentPage();
         paymentPage.fillData(invalidExpDateCard);
-        assertTrue(paymentPage.inputInvalidIsVisible(),"Должен показывать сообщение об ошибке, если срок действия карты более 5 лет, страница оплаты");
+        assertTrue(paymentPage.checkInvalidInputError(), "Должен показывать сообщение об ошибке, если срок действия карты более 5 лет, страница оплаты");
     }
 
     @Test
@@ -93,6 +92,6 @@ public class BuyingTripUiTest {
         StartPage startPage = new StartPage();
         CreditPage creditPage = startPage.goToCreditPage();
         creditPage.fillData(invalidExpDateCard);
-        assertTrue(creditPage.inputInvalidIsVisible(),"Должен показывать сообщение об ошибке, если срок действия карты более 5 лет, страница кредита");
+        assertTrue(creditPage.checkInvalidInputMessage(), "Должен показывать сообщение об ошибке, если срок действия карты более 5 лет, страница кредита");
     }
 }
