@@ -47,4 +47,6 @@ public class CreditPage {
         return inputInvalid.isDisplayed();
     }
 
+    public void waitForSuccessfulNotification() {
+    }
 }

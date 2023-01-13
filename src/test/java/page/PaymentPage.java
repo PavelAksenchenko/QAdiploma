@@ -47,4 +47,6 @@ public class PaymentPage {
         return inputInvalid.isDisplayed();
     }
 
+    public void waitForSuccessfulNotification() {
+    }
 }
