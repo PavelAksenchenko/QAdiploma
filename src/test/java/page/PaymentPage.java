@@ -35,12 +35,12 @@ public class PaymentPage {
         continueButton.click();
     }
 
-    public void waitForSuccessfulNotification() {
-        notificationOK.shouldBe(visible, Duration.ofMillis(15));
+    public void checkForSuccessfulNotification() {
+        notificationOK.shouldBe(visible, Duration.ofSeconds(15));
     }
 
     public void checkErrorMessageIsDisplayed() {
-        notificationError.shouldBe(visible, Duration.ofMillis(15));
+        notificationError.shouldBe(visible, Duration.ofSeconds(15));
     }
 
     public boolean checkInvalidInputError() {

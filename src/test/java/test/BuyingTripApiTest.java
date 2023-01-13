@@ -44,7 +44,7 @@ public class BuyingTripApiTest {
 
     @Test
     @DisplayName("Должен провести оплату за услуги с валидной карты")
-    void shoulldCheckValidBuyerPayment() {
+    void shouldCheckValidBuyerPayment() {
         int statusCode = ApiUtils.getRequestStatusCode(DataGenerator.getValidCard(), "/api/v1/pay");
         assertEquals(200, statusCode);
     }
@@ -54,5 +54,19 @@ public class BuyingTripApiTest {
     void shouldCheckValidBuyerCreditPayment() {
         int statusCode = ApiUtils.getRequestStatusCode(DataGenerator.getValidCard(), "/api/v1/credit");
         assertEquals(200, statusCode);
+    }
+
+    @Test
+    @DisplayName("Не должен провести оплату при покупке услуги в кредит")
+    void shouldCheckDeclinedCreditPayment() {
+        int statusCode = ApiUtils.getRequestStatusCode(DataGenerator.getDeclinedCard(), "/api/v1/credit");
+        assertNotEquals(200, statusCode);
+    }
+
+    @Test
+    @DisplayName("Не должен провести оплату при покупке услуги в кредит")
+    void shouldCheckDeclinedDebitPayment() {
+        int statusCode = ApiUtils.getRequestStatusCode(DataGenerator.getDeclinedCard(), "/api/v1/pay");
+        assertNotEquals(200, statusCode);
     }
 }

@@ -35,12 +35,12 @@ public class CreditPage {
         continueButton.click();
     }
 
-    public void waitForSuccessfulNotification() {
-        notificationOK.shouldBe(visible, Duration.ofMillis(15));
+    public void checkForSuccessfulNotification() {
+        notificationOK.shouldBe(visible, Duration.ofSeconds(15));
     }
 
     public void showErrorMessage() {
-        notificationError.shouldBe(visible, Duration.ofMillis(15));
+        notificationError.shouldBe(visible, Duration.ofSeconds(15));
     }
 
     public boolean checkInvalidInputMessage() {

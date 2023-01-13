@@ -2,8 +2,6 @@ version: '3.7'
 services:
   node-app:
     build: gate-simulator
-    image: node-app:1.0
-    container_name: node
     ports:
       - '9999:9999'
 
@@ -12,24 +10,23 @@ services:
     container_name: pstg-container
     ports:
       - '5432:5432'
-#    для Windows 10 Pro на Mac не работает:
-#    volumes:
-#      - ./data_postgres:/var/lib/postgres
+    #    для Windows 10 Pro на Mac не работает:
+    #    volumes:
+    #      - ./data_postgres:/var/lib/postgres
 
     environment:
       - POSTGRES_PASSWORD=pass
       - POSTGRES_USER=app
-      - POSTGRES_DB=app
+      - POSTGRES_DB=postgresApp
 
   mysql:
     image: mysql:8.0.18
     container_name: mysql-container
     ports:
       - '3306:3306'
-    volumes:
-      - ./data_mysql:/var/lib/mysql
     environment:
       - MYSQL_RANDOM_ROOT_PASSWORD=yes
       - MYSQL_DATABASE=app
       - MYSQL_USER=app
       - MYSQL_PASSWORD=pass
+
