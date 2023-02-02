@@ -1,0 +1,21 @@
+image: Ubuntu
+
+stack: jdk 11
+
+branches:
+  only:
+    - master
+
+build: off
+
+install:
+  - sudo curl -L "https://github.com/docker/compose/releases/download/1.28.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  - sudo chmod +x /usr/local/bin/docker-compose
+  - docker-compose up --build -d
+  - sleep 15
+  - java -jar ./aqa-shop.jar &
+  - sleep 15
+
+build_script:
+  - chmod +x gradlew
+  - ./gradlew clean test -Dselenide.headless=true
