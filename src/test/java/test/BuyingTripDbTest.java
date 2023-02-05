@@ -24,7 +24,7 @@ public class BuyingTripDbTest {
 
     @BeforeEach
     public void openPage() throws SQLException {
-        DbUtils.clearTables();
+        //DbUtils.clearTables();
         String url = System.getProperty("sut.url");
         open(url);
     }
@@ -45,8 +45,8 @@ public class BuyingTripDbTest {
         StartPage startPage = new StartPage();
         PaymentPage paymentPage = startPage.goToPaymentPage();
         paymentPage.fillData(validCard);
-        paymentPage.waitForSuccessfulNotification();
         assertEquals("APPROVED", DbUtils.findPaymentStatus());
+        paymentPage.checkForSuccessfulNotification();
     }
 
     @Test
@@ -55,8 +55,9 @@ public class BuyingTripDbTest {
         StartPage startPage = new StartPage();
         CreditPage creditPage = startPage.goToCreditPage();
         creditPage.fillData(validCard);
-        creditPage.waitForSuccessfulNotification();
         assertEquals("APPROVED", DbUtils.findCreditStatus());
+        creditPage.checkForSuccessfulNotification();
+
     }
 
     @Test
@@ -65,8 +66,8 @@ public class BuyingTripDbTest {
         StartPage startPage = new StartPage();
         PaymentPage paymentPage = startPage.goToPaymentPage();
         paymentPage.fillData(declinedCard);
-        paymentPage.checkErrorMessageIsDisplayed();
         assertEquals("DECLINED", DbUtils.findPaymentStatus());
+        paymentPage.checkErrorMessageIsDisplayed();
     }
 
     @Test
@@ -75,8 +76,9 @@ public class BuyingTripDbTest {
         StartPage startPage = new StartPage();
         CreditPage creditPage = startPage.goToCreditPage();
         creditPage.fillData(declinedCard);
-        creditPage.showErrorMessage();
         assertEquals("DECLINED", DbUtils.findCreditStatus());
+        creditPage.showErrorMessage();
+
     }
 
     @Test
@@ -86,8 +88,9 @@ public class BuyingTripDbTest {
         StartPage startPage = new StartPage();
         PaymentPage paymentPage = startPage.goToPaymentPage();
         paymentPage.fillData(fakeCard);
-        paymentPage.checkErrorMessageIsDisplayed();
         assertEquals("0", DbUtils.countRecords());
+        paymentPage.checkErrorMessageIsDisplayed();
+
     }
 
     @Test
