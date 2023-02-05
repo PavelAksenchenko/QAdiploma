@@ -1,4 +1,4 @@
-ppackage test;
+package test;
 
 import com.codeborne.selenide.logevents.SelenideLogger;
 import data.Card;
