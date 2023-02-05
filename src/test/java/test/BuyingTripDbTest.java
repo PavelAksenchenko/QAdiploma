@@ -45,8 +45,10 @@ public class BuyingTripDbTest {
         StartPage startPage = new StartPage();
         PaymentPage paymentPage = startPage.goToPaymentPage();
         paymentPage.fillData(validCard);
-        assertEquals("APPROVED", DbUtils.findPaymentStatus());
         paymentPage.checkForSuccessfulNotification();
+        assertEquals("APPROVED", DbUtils.findPaymentStatus());
+        System.out.println(DbUtils.findPaymentStatus());
+
     }
 
     @Test
@@ -55,9 +57,9 @@ public class BuyingTripDbTest {
         StartPage startPage = new StartPage();
         CreditPage creditPage = startPage.goToCreditPage();
         creditPage.fillData(validCard);
-        assertEquals("APPROVED", DbUtils.findCreditStatus());
         creditPage.checkForSuccessfulNotification();
-
+        assertEquals("APPROVED", DbUtils.findCreditStatus());
+        System.out.println(DbUtils.findCreditStatus());
     }
 
     @Test
@@ -66,8 +68,9 @@ public class BuyingTripDbTest {
         StartPage startPage = new StartPage();
         PaymentPage paymentPage = startPage.goToPaymentPage();
         paymentPage.fillData(declinedCard);
-        assertEquals("DECLINED", DbUtils.findPaymentStatus());
         paymentPage.checkErrorMessageIsDisplayed();
+        assertEquals("DECLINED", DbUtils.findPaymentStatus());
+        System.out.println(DbUtils.findPaymentStatus());
     }
 
     @Test
@@ -76,8 +79,9 @@ public class BuyingTripDbTest {
         StartPage startPage = new StartPage();
         CreditPage creditPage = startPage.goToCreditPage();
         creditPage.fillData(declinedCard);
-        assertEquals("DECLINED", DbUtils.findCreditStatus());
         creditPage.showErrorMessage();
+        assertEquals("DECLINED", DbUtils.findCreditStatus());
+        System.out.println(DbUtils.findCreditStatus());
 
     }
 
@@ -88,8 +92,9 @@ public class BuyingTripDbTest {
         StartPage startPage = new StartPage();
         PaymentPage paymentPage = startPage.goToPaymentPage();
         paymentPage.fillData(fakeCard);
-        assertEquals("0", DbUtils.countRecords());
         paymentPage.checkErrorMessageIsDisplayed();
+        assertEquals("0", DbUtils.countRecords());
+        System.out.println(DbUtils.countRecords());
 
     }
 
@@ -101,5 +106,6 @@ public class BuyingTripDbTest {
         creditPage.fillData(fakeCard);
         creditPage.showErrorMessage();
         assertEquals("0", DbUtils.countRecords());
+        System.out.println(DbUtils.countRecords());
     }
 }
