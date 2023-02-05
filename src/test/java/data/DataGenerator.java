@@ -30,8 +30,8 @@ public class DataGenerator {
         return new Card("4444 4444 4444 4441", getCurrentMonth(), getCurrentYear(), "123456789Йцукенгшщзхъ!\"№;%:?*()123456789Йцукенгшщзхъ!\"№;%:?*()", "123");
     }
 
-    public static Card getInvalidExpDateCard(int months) {
-        String month = LocalDate.now().minusMonths(months).format(DateTimeFormatter.ofPattern("yy"));
+     public static Card getInvalidExpDateCard(int months) {
+        String month = LocalDate.now().minusMonths(months).format(DateTimeFormatter.ofPattern("MM"));
         String year = getCurrentYear();
         return new Card("4444 4444 4444 4441", month, year, "Card Holder", "123");
     }
